@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
 import { FormBuilder, FormControl } from '@angular/forms';
+import { MappedData } from './services/models';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,13 @@ import { FormBuilder, FormControl } from '@angular/forms';
 export class AppComponent {
   title = 'Deutsche Bank Tech Test';
   logo = 'https://www.db.com/company/img/db_logo.gif';
-  regionData: any;
+  regionData: MappedData[];
   countryData: any;
   makeActive: boolean;
   cowsMoo: boolean;
 
-  constructor(private dataService: DataService, public fB: FormBuilder) {
+  constructor(private dataService: DataService,
+              public fB: FormBuilder) {
 
     // dataService.getCountryRegionData('europe').subscribe(data => {
     //   console.log(data);

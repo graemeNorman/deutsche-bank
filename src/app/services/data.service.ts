@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Region } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DataService {
   constructor(private http: HttpClient) { }
 
   getCountryRegionData(region: string): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + '/' + region)
+    return this.http.get<Region[]>(this.baseUrl + '/' + region)
       .pipe(
         catchError(this.handleError)
       );
