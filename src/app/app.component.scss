@@ -40,49 +40,28 @@
   }
 }
 
-// Small devices (landscape phones, less than 768px)
-@media (max-width: 768px) {  }
-
-// Medium devices (tablets, less than 992px)
-@media (max-width: 992px) {  }
-
-// Large devices (desktops, less than 1200px)
-@media (max-width: 1200px) {  }
-
-
-
 .container {
   background: $white;
   margin-top: 15px;
   min-height: 50vh;
   padding-top: 15px;
 
-  header {
-    //align-items: center;
-    //border-bottom: 2px solid #ecf0f0;
-    //display: inline-flex;
-    //margin: 0 0 15px;
-    //padding: 0 0 15px;
-    //width: 100%;
+  button.view-data:disabled {
+    cursor: not-allowed;
+  }
 
-    //.logo {
-    //  margin: 0 15px 0 0;
-    //  width: 5%;
-    //}
-    //.title { margin: 0; }
+  .country-data-table {
+    margin-top: 15px;
+
+    .currencies {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .flag {
+      border: 1px solid $black;
+      height: 50px;
+    }
   }
 }
 
-.country-data-table {
-  margin-top: 30px;
-
-  .currencies {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .flag {
-    border: 1px solid $black;
-    height: 50px;
-  }
-}

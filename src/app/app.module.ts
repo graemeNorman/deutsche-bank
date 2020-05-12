@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// import { RegionCountryComponent } from './components/region-country/region-country.component';
+import { RegionCountryComponent } from './components/region-country/region-country.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    // RegionCountryComponent
+    RegionCountryComponent
   ],
   imports: [
     BrowserModule,

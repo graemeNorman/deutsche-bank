@@ -38,3 +38,7 @@ export interface MappedData {
   currencies: {};
   flag: string;
 }
+
+export interface InitialData {
+  name: string;
+}
