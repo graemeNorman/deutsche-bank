@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  logo: 'https://www.db.com/company/img/db_logo.gif',
+  apiBaseUrl: 'https://restcountries.eu/rest/v2/region'
 };
 
 /*

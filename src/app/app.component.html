@@ -4,49 +4,44 @@
     <h1 class="( title )"> Deutsche Bank Technical Test </h1>
   </header>
 
-
   <div class="row ( country-region-select )">
     <div class="col-12">
-
-      <form [formGroup]="form"> <!-- (ngSubmit)="onSubmit()" -->
         <div class="row">
           <div class="col-sm-12 col-md-6">
             <div class="form-group">
-              <label for="regionSelect">Region:</label>
-              <select id="regionSelect" class="form-control" formControlName="state"(change)="onSelect(form.value)">
-                <option value="">Choose...</option>
-                <option *ngFor="let state of states" [ngValue]="state">
-                  {{ state }}
-                </option>
-              </select>
+              <app-region-country name="regionSelect"
+                                  label="Region"
+                                  (selectedValue)="emittedValue($event)"
+                                  [data]="states">
+              </app-region-country>
             </div>
-            <!--      <p>Form value: <br /> <code> {{ form.value | json }} </code> </p>-->
           </div>
 
           <div class="col-sm-12 col-md-6">
             <ng-container *ngIf="makeActive">
               <div class="form-group">
-                <label for="countrySelect">Country:</label>
-                <select id="countrySelect" class="form-control" formControlName="state"(change)="myFunc(form.controls.state.value)">
-                  <option value="">Please select a country</option>
-                  <option *ngFor="let area of regionData" [ngValue]="area">
-                    {{ area.name }}
-                  </option>
-                </select>
+                <app-region-country name="countrySelect"
+                                    label="Country"
+                                    (selectedValue)="emittedValue($event)"
+                                    [data]="regionData">
+                </app-region-country>
               </div>
-              <!--          <p style="color: blue;">Form value: <br /> <code> {{ form.controls.state.value | json }} </code> </p>-->
             </ng-container>
           </div>
         </div>
-        <button *ngIf="countryData" (click)="showDataTable()" class="btn btn-success">View Country Data</button>
-      </form>
-
+        <button *ngIf="selectedData !== undefined"
+                [disabled]="dataTableDisplay"
+                (click)="showDataTable()"
+                [ngClass]="dataTableDisplay ? 'btn-secondary' : 'btn-success'"
+                class="btn ( view-data )">
+          View Country Data
+        </button>
     </div>
   </div>
 
   <div *ngIf="makeActive" class="row ( country-data-table )">
     <div class="col-12">
-      <table class="table table-bordered table-responsive-md" *ngIf="cowsMoo">
+      <table class="table table-bordered table-responsive-md" *ngIf="dataTableDisplay">
         <thead>
         <tr>
           <th scope="col">Name</th>
@@ -58,15 +53,15 @@
         </thead>
         <tbody>
         <tr>
-          <th>{{ countryData.name }}</th>
-          <td>{{ countryData.capital }}</td>
-          <td>{{ countryData.population | number}}</td>
+          <th>{{ selectedData.name }}</th>
+          <td>{{ selectedData.capital }}</td>
+          <td>{{ selectedData.population | number }}</td>
           <td>
-            <ul class="currencies">
-              <li *ngFor="let currency of countryData.currencies"> {{ currency.name }} </li>
+            <ul class="( currencies )">
+              <li *ngFor="let currency of selectedData.currencies"> {{ currency.name }} </li>
             </ul>
           </td>
-          <td><img class="flag" src="{{ countryData.flag }}" alt="{{ countryData.name }}" /></td>
+          <td><img class="( flag )" src="{{ selectedData.flag }}" alt="{{ selectedData.name }}" /></td>
         </tr>
         </tbody>
       </table>

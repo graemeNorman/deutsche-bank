@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "deutsche-bank-tech-test"
+    }
+  },
+  "defaultProject": "deutsche-bank-tech-test",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

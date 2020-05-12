@@ -38,3 +38,14 @@ export interface MappedData {
   currencies: {};
   flag: string;
 }
+
+export interface InitialData {
+  name: string;
+}
+
+export interface State {
+  selectedRegion: InitialData;
+  selectedCountry: InitialData;
+  europeanCountries: MappedData[];
+  asianCountries: MappedData[];
+}
