@@ -3,6 +3,8 @@ import _ from 'lodash';
 import { environment } from '../environments/environment';
 import { DataService } from './services/data.service';
 import { InitialData, MappedData } from './models/models';
+import { Store } from '@ngrx/store';
+import {AvailableCountries, SelectedCountry, SelectedRegion} from './actions/actions';
 const states = require('../data/states.json');
 
 @Component({
@@ -21,7 +23,11 @@ export class AppComponent {
   viewBtn: boolean;
   states: InitialData[];
 
-  constructor(private dataService: DataService) {
+  // Store
+  // appStore: Observable<Array<any>>
+
+  constructor(private dataService: DataService,
+              private $store: Store<any>) {
     this.logo = environment.logo;
     this.states = _.cloneDeep(states);
   }
@@ -36,6 +42,9 @@ export class AppComponent {
           currencies: obj.currencies,
           flag: obj.flag,
         }));
+        this.$store.dispatch(
+          new AvailableCountries({ region: regionName, countries: this.regionData })
+        );
         this.makeActive = true;
         // console.log(this.regionData);
       }
@@ -45,9 +54,11 @@ export class AppComponent {
   emittedValue(eventData: any) {
     if (eventData.target.id === 'regionSelect') {
       this.makeActive = false;
+      this.$store.dispatch(new SelectedRegion({ name: eventData.target.value }));
       this.getRegionData(eventData.target.value);
     } else {
       this.selectedData = _.find(this.regionData, { name: eventData.target.value });
+      this.$store.dispatch(new SelectedCountry({ name: eventData.target.value }));
       this.dataTableDisplay ? this.viewBtn = false : this.viewBtn = true;
     }
   }
@@ -55,5 +66,4 @@ export class AppComponent {
   showDataTable() {
     this.dataTableDisplay = true;
   }
-
 }

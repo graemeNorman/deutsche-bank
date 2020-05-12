@@ -42,3 +42,10 @@ export interface MappedData {
 export interface InitialData {
   name: string;
 }
+
+export interface State {
+  selectedRegion: string;
+  selectedCountry: string;
+  europeanCountries: MappedData[];
+  asianCountries: MappedData[];
+}

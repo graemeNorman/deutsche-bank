@@ -7,6 +7,10 @@ import { RegionCountryComponent } from './components/region-country/region-count
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,20 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     // AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forRoot({deutsche_bank: reducer}),
+    StoreDevtoolsModule.instrument({
+      name: 'DeutscheBank'
+      // logOnly: environment.production,
+    }),
+    // StoreModule.forRoot(reducers, {
+    //   metaReducers,
+    //   runtimeChecks: {
+    //     strictStateImmutability: true,
+    //     strictActionImmutability: true,
+    //   }
+    // }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [HttpClient, DataService],
   bootstrap: [AppComponent]
