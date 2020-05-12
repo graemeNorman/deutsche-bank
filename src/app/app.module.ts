@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-// import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { RegionCountryComponent } from './components/region-country/region-country.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { DataService } from './services/data.service';
-import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { reducer } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+
+import { AppComponent } from './app.component';
+import { RegionCountryComponent } from './components/region-country/region-country.component';
+
+import { DataService } from './services/data.service';
+import { RequestCache } from './services/cache-request.service';
+import { CachingInterceptor } from './services/caching.interceptor';
+import { reducer } from './reducers';
 
 @NgModule({
   declarations: [
@@ -19,24 +20,19 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    // AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
     StoreModule.forRoot({deutsche_bank: reducer}),
     StoreDevtoolsModule.instrument({
       name: 'DeutscheBank'
-      // logOnly: environment.production,
     }),
-    // StoreModule.forRoot(reducers, {
-    //   metaReducers,
-    //   runtimeChecks: {
-    //     strictStateImmutability: true,
-    //     strictActionImmutability: true,
-    //   }
-    // }),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
-  providers: [HttpClient, DataService],
+  providers: [
+    HttpClient,
+    DataService,
+    RequestCache,
+    { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 

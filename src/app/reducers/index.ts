@@ -1,10 +1,10 @@
-import {ActionTypes, DeutscheBankActions} from '../actions/actions';
-import {State} from '../models/models';
-import {tassign} from 'tassign';
+import { ActionTypes, DeutscheBankActions } from '../actions/actions';
+import { State } from '../models/models';
+import { tassign } from 'tassign';
 
 export const initialState: State = {
-  selectedRegion: '',
-  selectedCountry: '',
+  selectedRegion: { name: '' },
+  selectedCountry: { name: '' },
   europeanCountries: [],
   asianCountries: []
 };
@@ -35,10 +35,6 @@ export function reducer(state: State = initialState, action: DeutscheBankActions
         });
       }
       break;
-
-      // case ActionTypes.REMOVE_PRODUCT:
-      //   const product = action.payload;
-      //   return state.filter((el) => el.id !== product.id);
 
     default:
       return state;

@@ -44,8 +44,8 @@ export interface InitialData {
 }
 
 export interface State {
-  selectedRegion: string;
-  selectedCountry: string;
+  selectedRegion: InitialData;
+  selectedCountry: InitialData;
   europeanCountries: MappedData[];
   asianCountries: MappedData[];
 }

@@ -29,7 +29,7 @@
             </ng-container>
           </div>
         </div>
-        <button *ngIf="selectedData"
+        <button *ngIf="selectedData !== undefined"
                 [disabled]="dataTableDisplay"
                 (click)="showDataTable()"
                 [ngClass]="dataTableDisplay ? 'btn-secondary' : 'btn-success'"
